@@ -4,4 +4,6 @@ node_modules
 token.json
 credentials.json
 .env
-
+.env.production
+.env.development
+build/

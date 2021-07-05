@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 
 import DataBreakdown from "./components/DataBreakdown";
 
-import dataRetriever from "./utils/dataRetriever";
+import { getDataFromBackend } from "./utils/dataRetriever";
 
 const useStyles = makeStyles({
   height_100_percent: {
@@ -40,9 +40,9 @@ function App() {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    dataRetriever.getDataFromBackend().then((res) => {
-      setData(res.data)
-      console.log(res.data)
+    getDataFromBackend().then((res) => {
+      setData(res.data);
+      console.log(res.data);
     });
   }, []);
 
@@ -93,7 +93,9 @@ function App() {
               >
                 <CardContent>
                   <Typography variant="h5">Total students</Typography>
-                  <Typography variant="body1">{`${data.num_approved + data.num_not_approved}`}</Typography>
+                  <Typography variant="body1">{`${
+                    data.num_approved + data.num_not_approved
+                  }`}</Typography>
                 </CardContent>
               </Card>
             </Grid>
@@ -134,10 +136,10 @@ function App() {
             lg={10}
           >
             <Grid item xs={6}>
-              <DataBreakdown data={data.approved}/>
+              <DataBreakdown data={data.approved} />
             </Grid>
             <Grid item xs={6}>
-              <DataBreakdown data={data.not_approved}/>
+              <DataBreakdown data={data.not_approved} />
             </Grid>
           </Grid>
         </Grid>
