@@ -13,17 +13,12 @@ const TOKEN_PATH = "token.json";
 
 // variables set up
 var totalEntries = 0;
-var total = { approved: {}, not_approved: {} };
-dataStructure.forEach((element) => {
-  total.approved[element.question] = {};
-  total.not_approved[element.question] = {};
-  total.num_approved = 0;
-  total.num_not_approved = 0;
-  element.options.forEach((element2) => {
-    total.approved[element.question][`${element2}`] = 0;
-    total.not_approved[element.question][`${element2}`] = 0;
-  });
-});
+var total = {
+  approved: {},
+  not_approved: {},
+  num_approved: 0,
+  num_not_approved: 0,
+};
 
 // preserve variables
 var google_credentials = {};
@@ -109,7 +104,12 @@ function parseData(auth) {
     (err, res) => {
       if (err) return console.log("The API returned an error: " + err);
       const rows = res.data.values;
-      console.log(new Date(Date.now()).toUTCString() + ": The API returned " + rows.length + " rows");
+      console.log(
+        new Date(Date.now()).toUTCString() +
+          ": The API returned " +
+          rows.length +
+          " rows"
+      );
 
       if (totalEntries === rows.length) {
         return;
@@ -117,8 +117,31 @@ function parseData(auth) {
         totalEntries = rows.length;
         if (rows.length) {
           // TODO: ADD PREPROCESSING TO REMOVE OLD DUPLICATES
+          var new_rows = [];
+          var idArray = [];
+          for (i = rows.length - 1; i >= 0; i--) {
+            row = rows[i];
+            var target_id = row[2];
+
+            if (new_rows.length === 0 || !idArray.includes(target_id)) {
+              idArray.push(row[2]);
+              new_rows.push(row);
+            }
+          }
           //
-          rows.forEach((row) => {
+
+          total.num_approved = 0;
+          total.num_not_approved = 0;
+          dataStructure.forEach((element) => {
+            total.approved[element.question] = {};
+            total.not_approved[element.question] = {};
+            element.options.forEach((element2) => {
+              total.approved[element.question][`${element2}`] = 0;
+              total.not_approved[element.question][`${element2}`] = 0;
+            });
+          });
+
+          new_rows.forEach((row) => {
             switch (row[9]) {
               case "Allocated": {
                 total.num_approved += 1;
