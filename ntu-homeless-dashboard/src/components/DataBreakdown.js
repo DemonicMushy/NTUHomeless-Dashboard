@@ -14,8 +14,22 @@ import response from "../utils/dataStructure";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-  }
+  },
 }));
+
+const COLORS = [
+  "#4dc9f6", //light blue
+  "#f67019", //orange
+  "#f53794", //pink
+  "#537bc4", //less light blue
+  "#acc236", //lime?
+  "#166a8f", //less less light blue
+  "#00a950", //green
+  "#58595b", //grey
+  "#8549ba", //purple
+  "#c9c420", //yellow
+  "#8c262d", //red
+];
 
 export default function DataBreakdown(props) {
   const classes = useStyles();
@@ -47,8 +61,10 @@ export default function DataBreakdown(props) {
                 <Grid container direction="column">
                   <Typography variant="subtitle1">{value.question}</Typography>
 
-                  <PieChart data={data} />
-                  {value.options.map((opt) => (
+                  <Grid item container direction="row" justify="center">
+                    <PieChart data={data} />
+                  </Grid>
+                  {value.options.map((opt, idxxx) => (
                     <Grid
                       item
                       container
@@ -56,6 +72,15 @@ export default function DataBreakdown(props) {
                       justify="space-between"
                     >
                       <Grid item xs={11}>
+                        <div
+                          style={{
+                            float: "left",
+                            width: "0.6rem",
+                            height: "0.6rem",
+                            margin: '4px',
+                            background: COLORS[idxxx],
+                          }}
+                        ></div>
                         <Typography noWrap variant="body2">
                           {opt}
                         </Typography>

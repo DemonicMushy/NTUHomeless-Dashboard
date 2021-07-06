@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     backgroundPosition: "center top",
     backgroundImage: `url(${bgTile})`,
     backgroundRepeat: "repeat",
-    minHeight: '100vh'
+    minHeight: "100vh",
   },
   height_100vh: {
     height: "100vh",
@@ -43,7 +43,10 @@ const useStyles = makeStyles({
     padding: "24px 32px 0px",
   },
   banner_body: {
-    padding: "0px 32px 12px",
+    padding: "0px 32px 0px",
+  },
+  padding_bottom: {
+    paddingBottom: "12px",
   },
 });
 
@@ -55,8 +58,12 @@ function App() {
   useEffect(() => {
     getDataFromBackend().then((res) => {
       setData(res.data);
-      console.log(res.data);
     });
+    setInterval(() => {
+      getDataFromBackend().then((res) => {
+        setData(res.data);
+      });
+    }, 30000);
   }, []);
 
   return (
@@ -83,7 +90,16 @@ function App() {
                   gutterBottom
                   variant="body2"
                 >
-                  Data represented is from crowd sourced data.
+                  Data represented is from crowd sourced data and is updated
+                  every half minute.
+                </Typography>
+                <Typography
+                  className={clsx(classes.banner_body, classes.padding_bottom)}
+                  gutterBottom
+                  variant="body2"
+                >
+                  Contribute to this data{" "}
+                  <a href="https://forms.gle/LNJSygqDufDmgN557">here.</a>
                 </Typography>
               </Paper>
             </Grid>
@@ -107,11 +123,41 @@ function App() {
                 >
                   <CardContent>
                     <Typography variant="h5">Total students</Typography>
-                    <Typography variant="body1">{`${
-                      data.num_approved + data.num_not_approved
-                    }`}</Typography>
+                    <Typography variant="body1">
+                      {data.num_not_approved
+                        ? `${data.num_approved + data.num_not_approved}`
+                        : 0}
+                    </Typography>
                   </CardContent>
                 </Card>
+              </Grid>
+              <Grid item xs={12}>
+                <Paper variant="outlined">
+                  {data.num_not_approved && (
+                    <Grid container direction="row">
+                      <div
+                        style={{
+                          backgroundColor: "green",
+                          height: "0.4rem",
+                          width: `${
+                            (data.num_approved * 100) /
+                            (data.num_approved + data.num_not_approved)
+                          }%`,
+                        }}
+                      ></div>
+                      <div
+                        style={{
+                          backgroundColor: "red",
+                          height: "0.4rem",
+                          width: `${
+                            (data.num_not_approved * 100) /
+                            (data.num_approved + data.num_not_approved)
+                          }%`,
+                        }}
+                      ></div>
+                    </Grid>
+                  )}
+                </Paper>
               </Grid>
               <Grid item xs={6}>
                 <Card
@@ -120,7 +166,9 @@ function App() {
                 >
                   <CardContent className={clsx(classes.color_green)}>
                     <Typography variant="h5">Successful Allocation</Typography>
-                    <Typography variant="body1">{`${data.num_approved}`}</Typography>
+                    <Typography variant="body1">
+                      {data.num_approved ? `${data.num_approved}` : 0}
+                    </Typography>
                   </CardContent>
                 </Card>
               </Grid>
@@ -133,7 +181,9 @@ function App() {
                     <Typography variant="h5">
                       Unsuccessful Allocation
                     </Typography>
-                    <Typography variant="body1">{`${data.num_not_approved}`}</Typography>
+                    <Typography variant="body1">
+                      {data.num_not_approved ? `${data.num_not_approved}` : 0}
+                    </Typography>
                   </CardContent>
                 </Card>
               </Grid>
