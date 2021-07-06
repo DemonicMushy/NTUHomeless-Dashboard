@@ -98,8 +98,8 @@ function parseData(auth) {
   const sheets = google.sheets({ version: "v4", auth });
   sheets.spreadsheets.values.get(
     {
-      spreadsheetId: "1cmBJ1Pk9vWP2k3uf0vjjrjA14IKs-kwrCtwapkLUS60",
-      range: "Sheet1!A2:M",
+      spreadsheetId: "170nW9rdQvzzgIQP_TANWgqgakaDqQgE6N111oMBkEwU",
+      range: "Sheet1!A2:L",
     },
     (err, res) => {
       if (err) return console.log("The API returned an error: " + err);
@@ -121,10 +121,10 @@ function parseData(auth) {
           var idArray = [];
           for (i = rows.length - 1; i >= 0; i--) {
             row = rows[i];
-            var target_id = row[2];
+            var target_id = row[1];
 
             if (new_rows.length === 0 || !idArray.includes(target_id)) {
-              idArray.push(row[2]);
+              idArray.push(row[1]);
               new_rows.push(row);
             }
           }
@@ -142,12 +142,12 @@ function parseData(auth) {
           });
 
           new_rows.forEach((row) => {
-            switch (row[9]) {
+            switch (row[8]) {
               case "Allocated": {
                 total.num_approved += 1;
                 dataStructure.forEach((element, idx) => {
                   element.options.forEach((opt) => {
-                    if (row[idx + 3] === opt) {
+                    if (row[idx + 2] === opt) {
                       total.approved[element.question][opt] += 1;
                     }
                   });
@@ -158,7 +158,7 @@ function parseData(auth) {
                 total.num_approved += 1;
                 dataStructure.forEach((element, idx) => {
                   element.options.forEach((opt) => {
-                    if (row[idx + 3] === opt) {
+                    if (row[idx + 2] === opt) {
                       total.approved[element.question][opt] += 1;
                     }
                   });
@@ -169,7 +169,7 @@ function parseData(auth) {
                 total.num_not_approved += 1;
                 dataStructure.forEach((element, idx) => {
                   element.options.forEach((opt) => {
-                    if (row[idx + 3] === opt) {
+                    if (row[idx + 2] === opt) {
                       total.not_approved[element.question][opt] += 1;
                     }
                   });
@@ -180,7 +180,7 @@ function parseData(auth) {
                 total.num_not_approved += 1;
                 dataStructure.forEach((element, idx) => {
                   element.options.forEach((opt) => {
-                    if (row[idx + 3] === opt) {
+                    if (row[idx + 2] === opt) {
                       total.not_approved[element.question][opt] += 1;
                     }
                   });
@@ -191,7 +191,7 @@ function parseData(auth) {
                 total.num_not_approved += 1;
                 dataStructure.forEach((element, idx) => {
                   element.options.forEach((opt) => {
-                    if (row[idx + 3] === opt) {
+                    if (row[idx + 2] === opt) {
                       total.not_approved[element.question][opt] += 1;
                     }
                   });
@@ -202,7 +202,7 @@ function parseData(auth) {
                 total.num_not_approved += 1;
                 dataStructure.forEach((element, idx) => {
                   element.options.forEach((opt) => {
-                    if (row[idx + 3] === opt) {
+                    if (row[idx + 2] === opt) {
                       total.not_approved[element.question][opt] += 1;
                     }
                   });
