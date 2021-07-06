@@ -12,16 +12,29 @@ import Typography from "@material-ui/core/Typography";
 import DataBreakdown from "./components/DataBreakdown";
 
 import { getDataFromBackend } from "./utils/dataRetriever";
+import bgTile from "./assets/background.jpg";
 
 const useStyles = makeStyles({
+  background: {
+    backgroundPosition: "center top",
+    backgroundImage: `url(${bgTile})`,
+    backgroundRepeat: "repeat",
+    minHeight: '100vh'
+  },
+  height_100vh: {
+    height: "100vh",
+  },
   height_100_percent: {
     height: "100%",
   },
   width_100_percent: {
     width: "100%",
   },
-  color_blue: {
-    color: "blue",
+  color_green: {
+    color: "green",
+  },
+  color_red: {
+    color: "red",
   },
   header_height: {
     height: "2vh",
@@ -49,101 +62,105 @@ function App() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Container maxWidth="lg">
-        <Grid container direction="column" alignItems="center" spacing={2}>
-          {/* Banner */}
-          <Grid id="banner" item container xs={12} md={11} lg={10}>
-            <Paper
-              variant="outlined"
-              className={clsx(classes.width_100_percent)}
+      <div className={clsx(classes.background)}>
+        <Container maxWidth="lg">
+          <Grid container direction="column" alignItems="center" spacing={2}>
+            {/* Banner */}
+            <Grid id="banner" item container xs={12} md={11} lg={10}>
+              <Paper
+                variant="outlined"
+                className={clsx(classes.width_100_percent)}
+              >
+                <Typography
+                  className={clsx(classes.banner_title)}
+                  gutterBottom
+                  variant="h5"
+                >
+                  NTUHomeless Dashboard
+                </Typography>
+                <Typography
+                  className={clsx(classes.banner_body)}
+                  gutterBottom
+                  variant="body2"
+                >
+                  Data represented is from crowd sourced data.
+                </Typography>
+              </Paper>
+            </Grid>
+
+            {/* Overall allocation stats */}
+            <Grid
+              id="overall-allocation-stats"
+              item
+              container
+              direction="row"
+              justify="center"
+              spacing={0}
+              xs={12}
+              md={11}
+              lg={10}
             >
-              <Typography
-                className={clsx(classes.banner_title)}
-                gutterBottom
-                variant="h5"
-              >
-                NTUHomeless Dashboard
-              </Typography>
-              <Typography
-                className={clsx(classes.banner_body)}
-                gutterBottom
-                variant="body2"
-              >
-                Data represented is from crowd sourced data.
-              </Typography>
-            </Paper>
-          </Grid>
+              <Grid item xs={12}>
+                <Card
+                  variant="outlined"
+                  className={clsx(classes.height_100_percent)}
+                >
+                  <CardContent>
+                    <Typography variant="h5">Total students</Typography>
+                    <Typography variant="body1">{`${
+                      data.num_approved + data.num_not_approved
+                    }`}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6}>
+                <Card
+                  variant="outlined"
+                  className={clsx(classes.height_100_percent)}
+                >
+                  <CardContent className={clsx(classes.color_green)}>
+                    <Typography variant="h5">Successful Allocation</Typography>
+                    <Typography variant="body1">{`${data.num_approved}`}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+              <Grid item xs={6}>
+                <Card
+                  variant="outlined"
+                  className={clsx(classes.height_100_percent)}
+                >
+                  <CardContent className={clsx(classes.color_red)}>
+                    <Typography variant="h5">
+                      Unsuccessful Allocation
+                    </Typography>
+                    <Typography variant="body1">{`${data.num_not_approved}`}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            </Grid>
 
-          {/* Overall allocation stats */}
-          <Grid
-            id="overall-allocation-stats"
-            item
-            container
-            direction="row"
-            justify="center"
-            spacing={3}
-            xs={12}
-            md={11}
-            lg={10}
-          >
-            <Grid item xs={12}>
-              <Card
-                variant="outlined"
-                className={clsx(classes.height_100_percent)}
-              >
-                <CardContent>
-                  <Typography variant="h5">Total students</Typography>
-                  <Typography variant="body1">{`${
-                    data.num_approved + data.num_not_approved
-                  }`}</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={6}>
-              <Card
-                variant="outlined"
-                className={clsx(classes.height_100_percent)}
-              >
-                <CardContent>
-                  <Typography variant="h5">Successful Allocation</Typography>
-                  <Typography variant="body1">{`${data.num_approved}`}</Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={6}>
-              <Card
-                variant="outlined"
-                className={clsx(classes.height_100_percent)}
-              >
-                <CardContent>
-                  <Typography variant="h5">Unsuccessful Allocation</Typography>
-                  <Typography variant="body1">{`${data.num_not_approved}`}</Typography>
-                </CardContent>
-              </Card>
+            {/* Data breakdowns */}
+            <Grid
+              id="data-breakdowns"
+              item
+              container
+              direction="row"
+              justify="center"
+              spacing={3}
+              xs={12}
+              md={11}
+              lg={10}
+            >
+              <Grid item xs={6}>
+                <DataBreakdown data={data.approved} />
+              </Grid>
+              <Grid item xs={6}>
+                <DataBreakdown data={data.not_approved} />
+              </Grid>
             </Grid>
           </Grid>
-
-          {/* Data breakdowns */}
-          <Grid
-            id="data-breakdowns"
-            item
-            container
-            direction="row"
-            justify="center"
-            spacing={3}
-            xs={12}
-            md={11}
-            lg={10}
-          >
-            <Grid item xs={6}>
-              <DataBreakdown data={data.approved} />
-            </Grid>
-            <Grid item xs={6}>
-              <DataBreakdown data={data.not_approved} />
-            </Grid>
-          </Grid>
-        </Grid>
-      </Container>
+        </Container>
+      </div>
     </React.Fragment>
   );
 }

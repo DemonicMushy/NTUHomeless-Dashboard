@@ -16,7 +16,7 @@ const response = [
     id: "E",
     question: "Type of individual",
     options: [
-      "Internation Student",
+      "International Student",
       "Local Student (<=30 min travel time)",
       "Local Student (>30 min, <=1 hr travel time)",
       "Local Student (>1 hr travel time)",
