@@ -85,7 +85,7 @@ for (var i = 1; i <= rows; i++) {
         });
         break;
       }
-      case "Recipient of OCH email on 2nd Jul 2021 1530H": {
+      case "Successfully Prioritised": {
         if (flag) {
           total.num_not_approved += 1;
           flag = false;
@@ -97,7 +97,7 @@ for (var i = 1; i <= rows; i++) {
         });
         break;
       }
-      case "Recipient of OCH email on 2nd Jul 2021 1630H": {
+      case "Balloting at a Later Date": {
         if (flag) {
           total.num_not_approved += 1;
           flag = false;
