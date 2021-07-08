@@ -2,19 +2,7 @@ import React from "react";
 
 var PieChart = require("react-chartjs").Pie;
 
-const COLORS = [
-  "#4dc9f6", //light blue
-  "#f67019", //orange
-  "#f53794", //pink
-  "#537bc4", //less light blue
-  "#acc236", //lime?
-  "#166a8f", //less less light blue
-  "#00a950", //green
-  "#58595b", //grey
-  "#8549ba", //purple
-  "#c9c420", //yellow
-  "#8c262d", //red
-];
+var COLORS = require("../utils/utils").COLORS
 
 // const chartData = [
 //   {
@@ -31,10 +19,10 @@ const chartOptions = {
     responsive: true,
     plugins: {
       legend: {
-        position: "top",
+        display: false
       },
       title: {
-        display: true,
+        display: false,
         // text: "Chart.js Pie Chart",
       },
     },

@@ -19,15 +19,12 @@ const response = [
       "Local Student (>30 min, <=1 hr travel time)",
       "Local Student (>1 hr travel time)",
       "PR with no Local Residence",
-      "Local Student (No Local Residence)"
+      "Local Student (No Local Residence)",
     ],
   },
   {
     question: "Currently allocated room during semester break?",
-    options: [
-      "Yes",
-      "No"
-    ]
+    options: ["Yes", "No"],
   },
   {
     question: "Funding method",
@@ -35,8 +32,8 @@ const response = [
       "Self-Funded (Own funding, Bursary)",
       "Internal Scholarship (Nanyang Scholarship, REP, LKC etc)",
       "External Scholarship (Organisations)",
-      "Other"
-    ]
+      "Other",
+    ],
   },
   {
     question: "Room Type Applied",
@@ -46,8 +43,8 @@ const response = [
       "Double (Non A/C)",
       "Double (A/C)",
       "Single Room (Attached Bath, Non A/C)",
-      "Single Room (Attached Bath, A/C)"
-    ]
+      "Single Room (Attached Bath, A/C)",
+    ],
   },
   {
     question: "Specific Room Applied",
@@ -55,8 +52,8 @@ const response = [
       "Same Room as Last Semester",
       "Same Hall, but Different Room from Last Semester",
       "Different Hall from Last Semester",
-      "Freshmen/Non-Resident Last Semester"
-    ]
+      "Freshmen/Non-Resident Last Semester",
+    ],
   },
   {
     question: "Hall Allocation Status (Most Recent)",
@@ -65,24 +62,18 @@ const response = [
       "Allocated (Processing)",
       "Not Allocated",
       "Not Allocated (Received Wait-list email)",
-      "Recipient of OCH email on 2nd Jul 2021 1530H",
-      "Recipient of OCH email on 2nd Jul 2021 1630H"
-    ] 
+      "Successfully Prioritised",
+      "Balloting at a Later Date",
+    ],
   },
   {
-    question: "If Allocated Hall, was the allocated room the room you selected?",
-    options: [
-      "Yes",
-      "No",
-      "N/A"
-    ]
+    question:
+      "If Allocated Hall, was the allocated room the room you selected?",
+    options: ["Yes", "No", "N/A"],
   },
   {
     question: "Were you on the Rec List?",
-    options: [
-      "Yes",
-      "No"
-    ]
+    options: ["Yes", "No"],
   },
   {
     question: "ECA Points",
@@ -97,9 +88,9 @@ const response = [
       "7",
       "8",
       "9",
-      "N/A or Unsure"
-    ]
-  }
+      "N/A or Unsure",
+    ],
+  },
 ];
 
-export default response
+export default response;

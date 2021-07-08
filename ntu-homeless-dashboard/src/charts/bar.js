@@ -30,10 +30,10 @@ const chartOptions = {
     responsive: true,
     plugins: {
       legend: {
-        position: "right",
+        display: false,
       },
       title: {
-        display: true,
+        display: false,
       },
     },
   },
@@ -45,7 +45,6 @@ export default function MyComponent(props) {
     if (props.data) {
       var datasets = [
         {
-          label: "My First dataset",
           fillColor: "rgba(220,220,220,0.5)",
           strokeColor: "rgba(220,220,220,0.8)",
           highlightFill: "rgba(220,220,220,0.75)",

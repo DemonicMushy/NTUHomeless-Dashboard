@@ -72,8 +72,8 @@ const response = [
       "Allocated (Processing)",
       "Not Allocated",
       "Not Allocated (Received Wait-list email)",
-      "Recipient of OCH email on 2nd Jul 2021 1530H",
-      "Recipient of OCH email on 2nd Jul 2021 1630H"
+      "Successfully Prioritised",
+      "Balloting at a Later Date"
     ] 
   },
   {
