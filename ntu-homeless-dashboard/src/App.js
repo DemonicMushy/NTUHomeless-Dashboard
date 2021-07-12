@@ -50,6 +50,12 @@ const useStyles = makeStyles({
   },
 });
 
+const formatter = Intl.NumberFormat('en-US', {
+  style: 'percent',
+  minimumFractionDigits: 2
+})
+
+
 function App() {
   const classes = useStyles();
 
@@ -134,6 +140,7 @@ function App() {
               <Grid item xs={12}>
                 <Paper variant="outlined">
                   {data.num_not_approved && (
+                    // Green-Red Bar
                     <Grid container direction="row">
                       <div
                         style={{
@@ -167,7 +174,7 @@ function App() {
                   <CardContent className={clsx(classes.color_green)}>
                     <Typography variant="h5">Successful Allocation</Typography>
                     <Typography variant="body1">
-                      {data.num_approved ? `${data.num_approved}` : 0}
+                      {data.num_approved ? `${data.num_approved} (${formatter.format(data.num_approved/(data.num_approved + data.num_not_approved))})` : 0} 
                     </Typography>
                   </CardContent>
                 </Card>
@@ -182,7 +189,7 @@ function App() {
                       Unsuccessful Allocation
                     </Typography>
                     <Typography variant="body1">
-                      {data.num_not_approved ? `${data.num_not_approved}` : 0}
+                      {data.num_not_approved ? `${data.num_not_approved} (${formatter.format(data.num_not_approved/(data.num_approved + data.num_not_approved))})` : 0}
                     </Typography>
                   </CardContent>
                 </Card>
